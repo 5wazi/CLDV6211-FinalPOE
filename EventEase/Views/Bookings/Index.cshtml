@@ -1,0 +1,46 @@
+﻿@model EventEase.Models.BookingViewModel
+
+@{
+    ViewData["Title"] = "Bookings";
+}
+
+<h1 class="text-center mb-4">Browse Bookings</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary mb-4">Create New Booking</a>
+</p>
+
+<form asp-controller="Bookings" asp-actions="Index" method="get">
+    <p>
+        <select asp-for="BookingDates" asp-items="Model.Dates" class="form-select w-auto d-inline-block">
+            <option value="">All Dates</option>
+        </select>
+        <label class="ms-3">Search: <input type="text" asp-for="searchString" class="form-control d-inline-block w-auto" /></label>
+        <input type="submit" value="Search" class="btn btn-outline-primary ms-2" />
+    
+
+    
+    </p>
+</form>
+
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model.Bookings!)
+        {
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card h-100 shadow card-hover-effect">
+                    <div class="card-body text-dark bg-white">
+                        <h5 class="card-title fw-bold">@Html.DisplayFor(modelItem => item.Event.EventName)</h5>
+                        <p class="card-text"><strong>Venue:</strong> @Html.DisplayFor(modelItem => item.Venue.VenueName)</p>
+                        <p class="card-text"><strong>Booking Date:</strong> @Html.DisplayFor(modelItem => item.BookingDate)</p>
+                        <div class="d-flex justify-content-between">
+                            <a asp-action="Edit" asp-route-id="@item.BookingId" class="btn btn-sm btn-outline-secondary">Edit</a>
+                            <a asp-action="Details" asp-route-id="@item.BookingId" class="btn btn-sm btn-outline-info">Details</a>
+                            <a asp-action="Delete" asp-route-id="@item.BookingId" class="btn btn-sm btn-outline-danger">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,38 @@
+﻿@model IEnumerable<EventEase.Models.Event>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<h1 class="text-center mb-4">Browse Events</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary mb-4">Create New Event</a>
+</p>
+
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card h-100 shadow card-hover-effect">
+                   <div class="card-body text-dark bg-white">
+                        <h5 class="card-title fw-bold">@Html.DisplayFor(modelItem => item.EventName)</h5>
+                        <p class="card-text"><strong>Date:</strong> @Html.DisplayFor(modelItem => item.EventDate)</p>
+                        <p class="card-text"><strong>Venue:</strong> @Html.DisplayFor(modelItem => item.Description)</p>
+                        <div class="d-flex justify-content-between">
+                            <a asp-action="Edit" asp-route-id="@item.EventName" class="btn btn-sm btn-outline-secondary">Edit</a>
+                            <a asp-action="Details" asp-route-id="@item.EventDate" class="btn btn-sm btn-outline-info">Details</a>
+                            <a asp-action="Delete" asp-route-id="@item.Description" class="btn btn-sm btn-outline-danger">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+
+
